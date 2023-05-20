@@ -4,4 +4,7 @@
  */
 
 // Style dla pliku z przykładem HTML fragmentu
-@import './example';
+@import './basic/vars.scss';
+@import './basic/mixin.scss';
+@import './basic/common.scss';
+@import './Elements/header.scss';
