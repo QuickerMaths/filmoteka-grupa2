@@ -283,4 +283,43 @@ body {
 }
 .hidden {
   display: none;
+}
+
+.footer__container {
+  text-align: center;
+  text-transform: none;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  min-width: 320px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: var(--background-footer);
+  color: var(--footer-text);
+}
+.footer__logo-svg {
+  fill: var(--orange-info);
+  width: 14px;
+  height: 12.75px;
+}
+.footer__license {
+  padding: 0 66px 10px 66px;
+}
+.footer__ling {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .footer__container {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  .footer__license {
+    padding: 0;
+  }
 }/*# sourceMappingURL=main.css.map */
