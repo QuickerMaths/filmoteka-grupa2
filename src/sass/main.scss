@@ -6,5 +6,8 @@
 // Style dla pliku z przykładem HTML fragmentu
 @import './basic/vars.scss';
 @import './basic/mixin.scss';
-@import './basic/common';
+@import './basic/common.scss';
+@import './Elements/header.scss';
+@import './Elements/footer.scss';
 @import './Elements/movies-list';
+
