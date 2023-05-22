@@ -255,7 +255,7 @@ body {
 @media (min-width: 1024px) {
   .header {
     background-image: url("../images/header-desktop-x1.jpg");
-    background-size: 1024px 230px;
+    background-size: cover;
   }
   .header--library {
     background-image: url("../images/header-library-x1.jpg");
