@@ -17,6 +17,12 @@ const getGenres = async url => {
 };
 
 const getMovies = async url => {
+  try {
+    const moviesResponse = await axios.get(url);
+    listBuilder.insertAdjacentHTML('beforeend', listBuilder(res.data.results));
+  } catch (err) {
+    console.log(err);
+  }
   const moviesResponse = await axios.get(url);
   const moviesArray = moviesResponse.data.results;
 
@@ -31,14 +37,30 @@ const movieGenresLink =
   'https://api.themoviedb.org/3/genre/movie/list?api_key=eaafeda4857b9c9fecdb45e75f22375a&language=en-US';
 export const APIKey = 'eaafeda4857b9c9fecdb45e75f22375a';
 
-const getDataFromAPI = async (searchURL = defaultMoviesURL) => {
+const getDataFromAPI = async searchURL => {
   moviesContainer.innerHTML = '';
-  const movieGenres = await getGenres(movieGenresLink);
-  const TVGenres = await getGenres(TVGenresLink);
+
   const moviesList = getMovies(searchURL).then(response => {
     listBuilder(response);
   });
 };
+
+// const listBuilder = data => {
+//   return data
+//     .map(item => {
+//       return `<li class="movie">
+//     <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
+//     <h3 class="title">${item.title}</h3>
+//     <p class="release">${release_date}</p>
+//     <button class"btn>More Info</button>
+//     </li>`;
+//     })
+//     .join('');
+// };
+
+// BigInt.addEventListener('click', () => {
+//   getMovies(defaultMoviesURL);
+// });
 
 const listBuilder = moviesArray => {
   moviesArray.forEach(elem => {
@@ -110,6 +132,4 @@ const listBuilder = moviesArray => {
   });
 };
 
-getDataFromAPI();
-
-export { moviesContainer, listBuilder, getMovies, getGenres, getDataFromAPI };
+getDataFromAPI(defaultMoviesURL);
