@@ -1,8 +1,4 @@
 import { getDataFromAPI, listBuilder, moviesContainer } from './movies-list';
-import {
-  collectMovieDetailsToWatchedArray,
-  collectMovieDetailsToQueuedArray,
-} from './load-watched';
 
 const header = document.querySelector('.header');
 
