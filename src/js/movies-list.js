@@ -1,3 +1,45 @@
+import axios from 'axios';
+import noImage from '../images/no-image.png';
+
+const moviesContainer = document.querySelector('.covers-container');
+
+export const genresList = {};
+
+const getGenres = async url => {
+  const genresResponse = await axios.get(url);
+  const genresArray = genresResponse.data.genres;
+
+  genresArray.map(genre => {
+    genresList[`${genre['id']}`] = genre.name;
+  });
+
+  return genresList;
+};
+
+const getMovies = async url => {
+  const moviesResponse = await axios.get(url);
+  const moviesArray = moviesResponse.data.results;
+
+  return moviesArray;
+};
+
+export const defaultMoviesURL =
+  'https://api.themoviedb.org/3/trending/movie/week?api_key=eaafeda4857b9c9fecdb45e75f22375a';
+const TVGenresLink =
+  'https://api.themoviedb.org/3/genre/tv/list?api_key=eaafeda4857b9c9fecdb45e75f22375a&language=en-US';
+const movieGenresLink =
+  'https://api.themoviedb.org/3/genre/movie/list?api_key=eaafeda4857b9c9fecdb45e75f22375a&language=en-US';
+export const APIKey = 'eaafeda4857b9c9fecdb45e75f22375a';
+
+const getDataFromAPI = async (searchURL = defaultMoviesURL) => {
+  moviesContainer.innerHTML = '';
+  const movieGenres = await getGenres(movieGenresLink);
+  const TVGenres = await getGenres(TVGenresLink);
+  const moviesList = getMovies(searchURL).then(response => {
+    listBuilder(response);
+  });
+};
+
 const listBuilder = moviesArray => {
   moviesArray.forEach(elem => {
     //Creating container and class for general movie info (cover, title, genres etc.)
@@ -67,3 +109,7 @@ const listBuilder = moviesArray => {
     }
   });
 };
+
+getDataFromAPI();
+
+export { moviesContainer, listBuilder, getMovies, getGenres, getDataFromAPI };
