@@ -210,7 +210,8 @@
 @media (min-width: 1024px) {
   .header {
     background-image: url('../images/header/header-desktop-x1.jpg');
-    background-size: 1024px 230px;
+    background-size: cover;
+
     &--library {
       background-image: url('../images/header/header-library-x1.jpg');
       background-position: 50% 50%;
