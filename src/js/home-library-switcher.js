@@ -2,9 +2,9 @@ import { getDataFromAPI, listBuilder, moviesContainer } from './movies-list';
 
 const header = document.querySelector('.header');
 
-const home = document.querySelector('.navigation__links-list').childNodes[1].querySelector('a');
+const home = document.getElementsById('home');
 
-const library = document.querySelector('.navigation__links-list').childNodes[3].querySelector('a');
+const library = document.getElementById('library');
 
 const watchedQueueBntList = document.querySelector('.header__buttons-list');
 const buttonWatched = document.querySelector('.header__list-button-watched');
