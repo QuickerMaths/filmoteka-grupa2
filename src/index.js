@@ -8,3 +8,5 @@ import {
 } from './js/movies-list';
 
 import { displayLoading, hideLoading } from './js/loader';
+
+import './js/search';
