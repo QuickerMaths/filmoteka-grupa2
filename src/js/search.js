@@ -43,7 +43,6 @@ const searchByKeyword = query => {
   const noResults = document.querySelector('.header__error-message');
   axios
     .get(`${API_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
-    .then(response => response.json())
     .then(data => {
       if (data.results.length === 0) {
         noResults.classList.remove('hidden');
