@@ -1,3 +1,4 @@
+
 button {
   cursor: pointer;
 }
@@ -160,4 +161,16 @@ button {
   .swiper-button-next {
     right: 4px;
   }
+
+.tui-pagination .tui-is-selected,
+.tui-pagination strong,
+.tui-pagination .tui-is-selected:hover {
+  color: #fff;
+  background: #bb1121;
+  border-color: #bb1121;
+  cursor: default;
+}
+.tui-pagination .tui-first-child.tui-is-selected {
+  border-left: 1px solid #bb1121;
+
 }
