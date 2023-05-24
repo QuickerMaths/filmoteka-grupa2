@@ -1,47 +1,8 @@
 import axios from 'axios';
+import renderMoviesCollection from './movies-list';
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 const API_URL = 'https://api.themoviedb.org/3';
-
-const searchMovies = async (query, page) => {
-  const response = await axios.get(
-    `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`,
-  );
-  return response.json();
-};
-
-const getGenresForSearch = async () => {
-  try {
-    const GET_GENRES_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&page=${page}`;
-    const response = await axios.get(GET_GENRES_URL);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const getMoviesForSearch = async (query, page = 1) => {
-  try {
-    const GET_MOVIES = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
-    const response = await axios.get(GET_MOVIES);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const getMovieByIDForSearch = async id => {
-  try {
-    const MOVIE_BY_ID = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
-    const response = await axios.get(MOVIE_BY_ID);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
 
 const genres = [
   { id: 28, name: 'Action' },
@@ -74,34 +35,6 @@ const genreToString = genreIdArray =>
     .filter((genre, index) => index < GENRES_SHOWN)
     .join(', ');
 
-const renderMoviesCollection = moviesCollection => {
-  const moviesCollectionDOM = document.querySelector('.covers-container');
-
-  const markup = moviesCollection
-    .map(
-      ({
-        id,
-        title,
-        poster_path,
-        release_date,
-        genre_ids,
-      }) => `<div class="cover__container" data-id="${id}">
-      <img src="https://image.tmdb.org/t/p/w400${poster_path}" alt="" class="cover__image"/>
-      <div class="cover-data">
-        <p class="cover-data__tittle">${title}</p>
-        <p class="cover-data__info">
-          <span class="cover-data__info">${genreToString(genre_ids)}</span> |
-          <span class="cover-data__info">${new Date(release_date).getFullYear()}</span>
-        </p>
-      </div>
-    </div>
-`,
-    )
-    .join('');
-
-  moviesCollectionDOM.innerHTML = markup;
-};
-
 const searchInput = document.querySelector('.header__search-input');
 const searchForm = document.querySelector('.header__search-form');
 const noResults = document.querySelector('.no-results');
@@ -120,14 +53,6 @@ const searchByKeyword = query => {
     })
     .catch(error => console.error(error));
 };
-
-searchForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const query = searchInput.value;
-  if (query === '') return;
-
-  searchByKeyword(query);
-});
 
 searchForm.addEventListener('submit', event => {
   event.preventDefault();

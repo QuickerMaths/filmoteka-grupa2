@@ -106,32 +106,3 @@
     width: 274px;
   }
 }
-
-.cover-data {
-  width: 100%;
-  height: 42px;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  padding-top: 10px;
-
-  @media screen and (min-width: 1280px) {
-    height: 60px;
-    padding-top: 12px;
-    font-size: 20px;
-    line-height: 24px;
-  }
-
-  &__title {
-    color: #212121;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  &__info {
-    color: var(--orange-info);
-  }
-}
