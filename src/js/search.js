@@ -41,7 +41,8 @@ const noResults = document.querySelector('.no-results');
 
 const searchByKeyword = query => {
   const noResults = document.querySelector('.header__error-message');
-  fetch(`${API_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+  axios
+    .get(`${API_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
     .then(response => response.json())
     .then(data => {
       if (data.results.length === 0) {
