@@ -1,7 +1,7 @@
 const loaderContainer = document.querySelector('.loader-container');
 
 const displayLoading = () => {
-  loaderContainer.style.display = 'block';
+  loaderContainer.style.display = 'flex';
 };
 
 const hideLoading = () => {
