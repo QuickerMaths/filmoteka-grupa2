@@ -1,15 +1,16 @@
-/*
- * Główny plik dla stylów.
- * Wszystkie partials podłączamy tutaj.
- */
 
-// Style dla pliku z przykładem HTML fragmentu
 @import './basic/vars.scss';
 @import './basic/mixin.scss';
 @import './basic/common.scss';
 @import './Elements/header.scss';
 @import './Elements/footer.scss';
 @import './Elements/movies-list';
-@import './partials/modal';
+@import './basic/visually-hidden';
+@import './basic/fonts';
+@import './Elements/custom-components';
+@import './Elements/gallery';
 @import './Elements/pagination';
 @import './Elements/loader';
+@import './basic/breakpoints';
+@import './partials/modal';
+
