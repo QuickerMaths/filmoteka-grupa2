@@ -51,39 +51,28 @@ const getDataFromAPI = async searchURL => {
   }
 };
 
-// const listBuilder = data => {
-//   return data
-//     .map(item => {
-//       return `<li class="movie">
-//     <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
-//     <h3 class="title">${item.title}</h3>
-//     <p class="release">${release_date}</p>
-//     <button class"btn>More Info</button>
-//     </li>`;
-//     })
-//     .join('');
-// };
-
-// BigInt.addEventListener('click', () => {
-//   getMovies(defaultMoviesURL);
-// });
-
 const listBuilder = moviesArray => {
   return moviesArray
     .map(item => {
       return `<li class="covers__container">
-    <img class="cover__image" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
-    <h3 class="cover__figcaption-title">${item.title}</h3>
-    <p class="cover__figcaptio-movie-data">${release_date}</p>
-    <button class"btn>More Info</button>
+      <img class="cover__image" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
+      <h3 class="cover__figcaption-title">${item.title}</h3>
+      <p class="cover__figcaption-movie-data">${releaseDate}</p>
+      <button class="btn">More Info</button>
     </li>`;
     })
     .join('');
 };
 
-BigInt.addEventListener('click', () => {
-  getMovies(defaultMoviesURL);
-});
+//   });
+// };
+
+// const moviesContainer = document.getElementById('covers-container');
+// moviesContainer.innerHTML = listBuilder(moviesArray);
+
+// BigInt.addEventListener('click', () => {
+//   getMovies(defaultMoviesURL);
+// });
 
 // const listBuilder = moviesArray => {
 //   moviesArray.forEach(elem => {
