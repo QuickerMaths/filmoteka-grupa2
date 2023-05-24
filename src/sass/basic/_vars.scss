@@ -12,7 +12,7 @@
   --background-page-button: #f7f7f7;
   --modal-params: #8c8c8c;
   --timing: cubic-bezier(0.4, 0, 0.2, 1);
-};
+}
 
 $primary-font-style: Roboto, sans-serif;
 
@@ -30,7 +30,4 @@ $secondary-bgc: #f7f7f7;
 
 $accent-color: #ff6b08;
 
-$bg-header-gradient: linear-gradient(rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56));
-
-      
+$bg-header-gradient: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
