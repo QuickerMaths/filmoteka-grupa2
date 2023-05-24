@@ -6,12 +6,27 @@
     transition: $parametrs 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-@mixin font($fw, $fs, $lh, $ls) {
-  font-weight: $fw;
+
+@mixin font(
+  $fss: normal,
+  $fs: 12px,
+  $fw: 500,
+  $lh: 14px,
+  $ls: 0.03em,
+  $tt: none,
+  $tal: center,
+  $td: none
+) {
+  font-style: $fss;
   font-size: $fs;
+  font-weight: $fw;
   line-height: $lh;
   letter-spacing: $ls;
+  text-transform: $tt;
+  text-align: $tal;
+  text-decoration: $td;
 }
+
 @mixin animation-ping-pong {
   animation-name: ping-pong;
   animation-duration: 500ms;
