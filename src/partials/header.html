@@ -15,7 +15,7 @@
   </nav>
   <form class="header__search-form">
     <input type="text" placeholder="Movie search" class="header__search-input" name="search" />
-    <button type="submi" class="header__search-button">
+    <button type="submit" class="header__search-button">
       <svg class="header__search-icon">
         <use href="./images/sprite.svg#icon-search" />
       </svg>
@@ -26,10 +26,10 @@
   </p>
   <ul class="header__buttons-list hidden">
     <li class="header__buttons-list-item">
-      <button class="header__list-button-watched">Watched</button>
+      <button id="watched-btn" class="header__list-button-watched">Watched</button>
     </li>
     <li class="header__buttons-list-item">
-      <button class="header__list-button-queue">Queue</button>
+      <button id="queue-btn" class="header__list-button-queue">Queue</button>
     </li>
   </ul>
 </header>

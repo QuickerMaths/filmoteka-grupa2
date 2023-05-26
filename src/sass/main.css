@@ -255,8 +255,10 @@ body {
 }
 @media (min-width: 1024px) {
   .header {
+
     background-image: url("../images/header/header-desktop-x1.jpg");
-    background-size: 1024px 230px;
+    background-size: cover;
+
   }
   .header--library {
     background-image: url("../images/header/header-library-x1.jpg");
@@ -286,6 +288,18 @@ body {
   display: none;
 }
 
+.tui-pagination .tui-is-selected,
+.tui-pagination strong,
+.tui-pagination .tui-is-selected:hover {
+  color: #fff;
+  background: #bb1121;
+  border-color: #bb1121;
+  cursor: default;
+}
+
+.tui-pagination .tui-first-child.tui-is-selected {
+  border-left: 1px solid #bb1121;
+}
 .footer__container {
   text-align: center;
   text-transform: none;
