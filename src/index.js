@@ -5,6 +5,7 @@ import {
   getmoviesArray,
   getGenresArray,
   getDataFromAPI,
+  searchMovie,
 } from './js/movies-list';
 import { Modal } from './js/modal';
 import { displayLoading, hideLoading } from './js/loader';
