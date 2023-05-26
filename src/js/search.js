@@ -1,5 +1,5 @@
 import axios from 'axios';
-import renderMoviesCollection from './movies-list';
+import { listBuilder } from './movies-list-builder';
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 const API_URL = 'https://api.themoviedb.org/3';
