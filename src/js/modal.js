@@ -17,8 +17,6 @@ moviesContainer.addEventListener('click', event => {
 });
 
 showModal.addEventListener('click', () => {
-  toggleModal();
-
   document.querySelector('.modal__close-btn').addEventListener('click', () => {
     toggleModal();
   });
@@ -93,8 +91,7 @@ function getModalFilmInfo(data) {
 const Modal = data => {
   modal.innerHTML = '';
   modal.insertAdjacentHTML('beforeend', getModalFilmInfo(data));
-
-  // removeEventListener();
+  removeEventListener();
 };
 
 function removeEventListener() {
@@ -102,8 +99,6 @@ function removeEventListener() {
     fetchInfo(event.target.parentNode.id);
   });
   showModal.removeEventListener('click', () => {
-    toggleModal();
-
     document.querySelector('.modal__close-btn').addEventListener('click', () => {
       toggleModal();
     });
