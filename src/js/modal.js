@@ -1,18 +1,29 @@
-export { Modal };
+import axios from 'axios';
+
+const moviesContainer = document.getElementById('movies-container');
 const filmImg = document.querySelector('.card-film__film-img');
 const filmInfo = document.querySelector('.card-film__film-desc');
-const cardFilm = document.querySelector('.cover__container');
 const showModal = document.querySelector('.backdrop');
 const closeBtn = document.querySelector('.modal__btn');
 
-cardFilm.addEventListener('click', event => {
-  const id = event.target.id;
-  fetchFilmInfo(id);
-  toggleModal();
+const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
+
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
+    toggleModal();
+  }
 });
 
 closeBtn.addEventListener('click', () => {
   toggleModal();
+});
+
+showModal.addEventListener('click', () => {
+  showModal.classList.add('is-hidden');
+});
+
+moviesContainer.addEventListener('click', event => {
+  fetchInfo(event.target.parentNode.id);
 });
 
 function toggleModal() {
@@ -20,15 +31,21 @@ function toggleModal() {
 }
 
 const fetchInfo = async id => {
-  const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
-  const array = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
-  const response = await array.json();
-  return response;
+  try {
+    const movieData = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
+    );
+    console.log(movieData.data);
+    Modal(movieData.data);
+    toggleModal();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const fetchFilmInfo = async id => {
-  Modal(await fetchInfo(id));
-};
+// const fetchFilmInfo = async id => {
+//   Modal(await fetchInfo(id));
+// };
 
 function getModalFilmImg(data) {
   return `<img class="card-film__img"
@@ -36,16 +53,24 @@ function getModalFilmImg(data) {
     loading="lazy">`;
 }
 
-function removeEventListener() {
-  cardFilm.removeEventListener('click', event => {
-    const id = event.target.id;
-    fetchFilmInfo(id);
-    toggleModal();
-  });
-  closeBtn.removeEventListener('click', () => {
-    toggleModal();
-  });
-}
+// function removeEventListener() {
+//   cardFilm.removeEventListener('click', event => {
+//     const id = event.target.parentNode.id;
+//     fetchFilmInfo(id);
+//     toggleModal();
+//   });
+//   closeBtn.removeEventListener('click', () => {
+//     toggleModal();
+//   });
+//   showModal.removeEventListener('click', () => {
+//     toggleModal();
+//   });
+//   window.removeEventListener('keydown', event => {
+//     if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
+//       toggleModal();
+//     }
+//   });
+// }
 
 function getModalFilmInfo(data) {
   return `<ul class="card-film__list">
@@ -74,7 +99,7 @@ function getModalFilmInfo(data) {
                     <td class="card-film__table__propery">Genre</td>
                     <td class="card-film__table__value">${data.genres
                       .map(genre => genre.name)
-                      .join(', ')}</td>
+                      .join(', ')}</td> 
                 </tr>
             </tbody>
         </table>
@@ -86,10 +111,14 @@ function getModalFilmInfo(data) {
            </ul>`;
 }
 
-const Modal = async data => {
+const Modal = data => {
   filmImg.innerHTML = '';
   filmInfo.innerHTML = '';
-  filmImg.innerHTML = getModalFilmImg(data);
-  filmInfo.innerHTML = getModalFilmInfo(data);
-  removeEventListener();
+  filmImg.insertAdjacentHTML('beforeend', getModalFilmImg(data));
+  filmImg.insertAdjacentHTML('afterend', getModalFilmInfo(data));
+  // removeEventListener();
 };
+
+{
+  /* <td class="card-film__table__value">${genreToString(data.genres)}</td> */
+}

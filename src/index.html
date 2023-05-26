@@ -18,26 +18,21 @@
     />
     <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
     <script type="module" src="./index.js"></script>
-    <script src="./js/pagination.js" type="module"></script>
   </head>
 
   <body>
     <!-- W taki sposbu dodajemy fragmenty w główny HTML-plik strony. -->
 
     <include src="./partials/header.html"></include>
-    <include src="./partials/movies-list.html"></include>
-    <include src="./partials/pagination.html"></include>
+    <main class="main">
+      <!-- Custom components  -->
+      <include src="./partials/loader.html"></include>
+      <include src="./partials/custom-components.html"></include>
+
+      <include src="./partials/movies-list.html"></include>
+      <include src="./partials/pagination.html"></include>
+    </main>
     <include src="./partials/footer.html"></include>
     <include src="./partials/modal.html"></include>
-    <<<<<<< Updated upstream
-    <include src="./partials/loader.html"></include>
-    ======= <<<<<<< Updated upstream =======
-    <include src="./partials/loader.html"></include>
-
-    <script src="./js/pagination.js" type="module"></script>
-    <script src="./js/searchFilm.js" type="module"></script>
-    <script src="./js/myLibrary.js" type="module"></script>
-    <script src="./js/localStorage.js" type="module"></script>
-    >>>>>>> Stashed changes >>>>>>> Stashed changes
   </body>
 </html>
