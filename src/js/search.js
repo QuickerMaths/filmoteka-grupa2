@@ -1,5 +1,5 @@
 import axios from 'axios';
-import renderMoviesCollection from './movies-list';
+import { listBuilder } from './movies-list-builder';
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 const API_URL = 'https://api.themoviedb.org/3';
@@ -48,7 +48,7 @@ const searchByKeyword = query => {
         noResults.classList.remove('hidden');
       } else {
         noResults.classList.add('hidden');
-        renderMoviesCollection(data.results);
+        listBuilder(data.results);
       }
     })
     .catch(error => console.error(error));
