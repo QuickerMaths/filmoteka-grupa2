@@ -1,26 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   font-size: $primary-font-size;
-  color: $primary-text-color;
   line-height: $primary-line-height;
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-li {
-  margin: 0;
-  padding: 0;
 }
 
 .is-hidden {
@@ -35,7 +22,7 @@ img {
   height: auto;
 }
 
-ul {
+li {
   list-style: none;
 }
 
