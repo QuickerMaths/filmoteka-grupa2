@@ -9,3 +9,4 @@ import {
 import { Modal } from './js/modal';
 import { displayLoading, hideLoading } from './js/loader';
 import './js/search';
+import { userSignUp, userSignIn, userSignOut, checkAuthState } from './js/firebase';
