@@ -48,7 +48,7 @@ const searchByKeyword = query => {
         noResults.classList.remove('hidden');
       } else {
         noResults.classList.add('hidden');
-        renderMoviesCollection(data.results);
+        listBuilder(data.results);
       }
     })
     .catch(error => console.error(error));
