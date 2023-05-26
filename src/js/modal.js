@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const moviesContainer = document.getElementById('movies-container');
-const filmImg = document.querySelector('.card-film__film-img');
-const filmInfo = document.querySelector('.card-film__film-desc');
+const modal = document.querySelector('.modal');
 const showModal = document.querySelector('.backdrop');
-const closeBtn = document.querySelector('.modal__btn');
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 
@@ -14,28 +12,23 @@ window.addEventListener('keydown', event => {
   }
 });
 
-closeBtn.addEventListener('click', () => {
-  toggleModal();
-});
-
-showModal.addEventListener('click', () => {
-  showModal.classList.add('is-hidden');
-});
-
 moviesContainer.addEventListener('click', event => {
   fetchInfo(event.target.parentNode.id);
 });
 
-function toggleModal() {
-  showModal.classList.toggle('is-hidden');
-}
+showModal.addEventListener('click', () => {
+  toggleModal();
+
+  document.querySelector('.modal__close-btn').addEventListener('click', () => {
+    toggleModal();
+  });
+});
 
 const fetchInfo = async id => {
   try {
     const movieData = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
     );
-    console.log(movieData.data);
     Modal(movieData.data);
     toggleModal();
   } catch (error) {
@@ -43,61 +36,42 @@ const fetchInfo = async id => {
   }
 };
 
-// const fetchFilmInfo = async id => {
-//   Modal(await fetchInfo(id));
-// };
-
-function getModalFilmImg(data) {
-  return `<img class="card-film__img"
-    src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="alt"
-    loading="lazy">`;
-}
-
-// function removeEventListener() {
-//   cardFilm.removeEventListener('click', event => {
-//     const id = event.target.parentNode.id;
-//     fetchFilmInfo(id);
-//     toggleModal();
-//   });
-//   closeBtn.removeEventListener('click', () => {
-//     toggleModal();
-//   });
-//   showModal.removeEventListener('click', () => {
-//     toggleModal();
-//   });
-//   window.removeEventListener('keydown', event => {
-//     if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
-//       toggleModal();
-//     }
-//   });
-// }
-
 function getModalFilmInfo(data) {
-  return `<ul class="card-film__list">
+  return `
+  <button class="modal__close-btn">
+      <svg viewBox="0 0 30 30" class="modal__close-btn--svg" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8L22 22" class="modal__close-btn--path" />
+        <path d="M8 22L22 8" class="modal__close-btn--path" />
+      </svg>
+    </button>
+  <img class="modal__img"
+    src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="alt"
+    loading="lazy">
+  <ul class="modal__list">
      <li>
-       <h2 class="card-film__title">${data.title}</h2>
+       <h2 class="modal__title">${data.title}</h2>
     </li>
-    <li class="card-film__properties">
-       <table class="card-film__table">
+    <li class="modal__properties">
+       <table class="modal__table">
             <tbody>
                 <tr>
-                    <td class="card-film__table__propery">Vote / Votes</td>
-                    <td class="card-film__table__value"><span
-                        class="card-film__table__rate">${data.vote_average.toFixed(2)}</span> / ${
+                    <td class="modal__table__propery">Vote / Votes</td>
+                    <td class="modal__table__value"><span
+                        class="modal__table__rate">${data.vote_average.toFixed(2)}</span> / ${
     data.vote_count
   }</td>
                 </tr>
                 <tr>
-                    <td class="card-film__table__propery">Popularity</td>
-                    <td class="card-film__table__value">${data.popularity}</td>
+                    <td class="modal__table__propery">Popularity</td>
+                    <td class="modal__table__value">${data.popularity}</td>
                 </tr>
                 <tr>
-                    <td class="card-film__table__propery">Original Title</td>
-                    <td class="card-film__table__value">${data.original_title}</td>
+                    <td class="modal__table__propery">Original Title</td>
+                    <td class="modal__table__value">${data.original_title}</td>
                 </tr>
                 <tr>
-                    <td class="card-film__table__propery">Genre</td>
-                    <td class="card-film__table__value">${data.genres
+                    <td class="modal__table__propery">Genre</td>
+                    <td class="modal__table__value">${data.genres
                       .map(genre => genre.name)
                       .join(', ')}</td> 
                 </tr>
@@ -105,20 +79,42 @@ function getModalFilmInfo(data) {
         </table>
     </li>
     <li>
-        <p class="card-film__list__desc__title">About</p>
-        <p class="card-film__list__desc">${data.overview}</p>
+        <p class="modal__list__desc__title">About</p>
+        <p class="modal__list__desc">${data.overview}</p>
            </li>
+           <li>
+           <div class="modal__btn-container mod--buttons">
+      <button type="button" class="modal__btn modal__btn-watch">add to watched</button>
+      <button type="button" class="modal__btn modal__btn-queue">add to queue</button>
+    </div></li>
            </ul>`;
 }
 
 const Modal = data => {
-  filmImg.innerHTML = '';
-  filmInfo.innerHTML = '';
-  filmImg.insertAdjacentHTML('beforeend', getModalFilmImg(data));
-  filmImg.insertAdjacentHTML('afterend', getModalFilmInfo(data));
+  modal.innerHTML = '';
+  modal.insertAdjacentHTML('beforeend', getModalFilmInfo(data));
+
   // removeEventListener();
 };
 
-{
-  /* <td class="card-film__table__value">${genreToString(data.genres)}</td> */
+function removeEventListener() {
+  moviesContainer.removeEventListener('click', event => {
+    fetchInfo(event.target.parentNode.id);
+  });
+  showModal.removeEventListener('click', () => {
+    toggleModal();
+
+    document.querySelector('.modal__close-btn').addEventListener('click', () => {
+      toggleModal();
+    });
+  });
+  window.removeEventListener('keydown', event => {
+    if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
+      toggleModal();
+    }
+  });
+}
+
+function toggleModal() {
+  showModal.classList.toggle('is-hidden');
 }
