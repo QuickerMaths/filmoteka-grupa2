@@ -3,22 +3,22 @@ import noImage from '../images/no-image.png';
 
 const moviesContainer = document.querySelector('.covers-container');
 
-export const genresList = {};
+// export const genresList = {};
 
-const getGenres = async url => {
-  try {
-    const genresResponse = await axios.get(url);
-    const genresArray = genresResponse.data.genres;
+// const getGenres = async url => {
+//   try {
+//     const genresResponse = await axios.get(url);
+//     const genresArray = genresResponse.data.genres;
 
-    genresArray.map(genre => {
-      genresList[`${genre['id']}`] = genre.name;
-    });
+//     genresArray.map(genre => {
+//       genresList[`${genre['id']}`] = genre.name;
+//     });
 
-    return genresList;
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     return genresList;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 const getMovies = async url => {
   try {
@@ -31,19 +31,14 @@ const getMovies = async url => {
   }
 };
 
-export const defaultMoviesURL =
+const trendingMoviesURL =
   'https://api.themoviedb.org/3/trending/movie/week?api_key=eaafeda4857b9c9fecdb45e75f22375a';
-const TVGenresLink =
-  'https://api.themoviedb.org/3/genre/tv/list?api_key=eaafeda4857b9c9fecdb45e75f22375a&language=en-US';
-const movieGenresLink =
-  'https://api.themoviedb.org/3/genre/movie/list?api_key=eaafeda4857b9c9fecdb45e75f22375a&language=en-US';
-export const APIKey = 'eaafeda4857b9c9fecdb45e75f22375a';
 
 const getDataFromAPI = async searchURL => {
   try {
     moviesContainer.innerHTML = '';
 
-    const moviesList = getMovies(searchURL).then(response => {
+    await getMovies(searchURL).then(response => {
       listBuilder(response);
     });
   } catch (err) {
@@ -52,96 +47,22 @@ const getDataFromAPI = async searchURL => {
 };
 
 const listBuilder = moviesArray => {
-  return moviesArray
+  moviesContainer.innerHTML = moviesArray
     .map(item => {
       return `<li class="covers__container">
       <img class="cover__image" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title}">
       <h3 class="cover__figcaption-title">${item.title}</h3>
-      <p class="cover__figcaption-movie-data">${releaseDate}</p>
+      <p class="cover__figcaption-movie-data">${item.release_date}</p>
       <button class="btn">More Info</button>
     </li>`;
     })
     .join('');
 };
 
-//   });
-// };
+getDataFromAPI(trendingMoviesURL);
 
-// const moviesContainer = document.getElementById('covers-container');
-// moviesContainer.innerHTML = listBuilder(moviesArray);
+export const searchMovie = async (query, page = 1) => {
+  const searchLink = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}&api_key=eaafeda4857b9c9fecdb45e75f22375a`;
 
-// BigInt.addEventListener('click', () => {
-//   getMovies(defaultMoviesURL);
-// });
-
-// const listBuilder = moviesArray => {
-//   moviesArray.forEach(elem => {
-//     //Creating container and class for general movie info (cover, title, genres etc.)
-//     const movieCoverFigure = document.createElement('figure');
-//     movieCoverFigure.classList.add('cover__container');
-
-//     //Creating more details label
-//     const moreDetailsLabel = document.createElement('span');
-//     moreDetailsLabel.classList.add('cover__label');
-//     moreDetailsLabel.innerHTML = `Click for more details`;
-
-//     //Creating img tag for movie cover
-//     const coverImg = document.createElement('img');
-//     coverImg.classList.add('cover__image');
-//     coverImg.setAttribute('src', `https://image.tmdb.org/t/p/w500${elem['poster_path']}`);
-//     coverImg.setAttribute('alt', elem['original_title']);
-//     coverImg.setAttribute('loading', 'lazy');
-//     const imgAtrribute = coverImg.getAttribute('src');
-//     if (imgAtrribute === 'https://image.tmdb.org/t/p/w500null') {
-//       coverImg.setAttribute('src', `${noImage}`);
-//       coverImg.setAttribute('alt', `no poster found`);
-//     }
-//     //Creating figcaption (container for title, genres etc.)
-//     const coverFigcaption = document.createElement('figcaption');
-//     coverFigcaption.classList.add('cover__figcaption');
-
-//     //Header for movie title
-//     const movieTitle = document.createElement('h3');
-//     movieTitle.classList.add('cover__figcaption-title');
-
-//     movieTitle.innerHTML = elem['name'] || elem['original_name'] || elem['original_title'];
-
-//     //Tag for movie data (genres, release date)
-//     const movieData = document.createElement('p');
-//     movieData.classList.add('cover__figcaption-movie-data');
-
-//     const movieGenresArray = [];
-
-//     if (elem['genre_ids']) {
-//       for (const id of elem['genre_ids']) {
-//         movieGenresArray.push(genresList[`${id}`]);
-//       }
-//     } else {
-//       elem['genres'].forEach(e => {
-//         movieGenresArray.push(genresList[`${e['id']}`]);
-//       });
-//     }
-
-//     const releaseDate = new Date(`${elem['release_date'] || elem['first_air_date']}`);
-
-//     movieData.innerHTML = `${movieGenresArray.join(', ')} | ${releaseDate.getFullYear()}`;
-
-//     coverFigcaption.append(movieTitle);
-//     coverFigcaption.append(movieData);
-
-//     movieCoverFigure.append(coverImg);
-//     movieCoverFigure.append(moreDetailsLabel);
-//     movieCoverFigure.append(coverFigcaption);
-//     moviesContainer.append(movieCoverFigure);
-
-//     const movieIDInjection = document.querySelectorAll('[class^=cover_]');
-
-//     for (const tag of movieIDInjection) {
-//       if (tag.id === '') {
-//         tag.setAttribute('id', elem['id']);
-//       }
-//     }
-//   });
-// };
-
-getDataFromAPI(defaultMoviesURL);
+  return await getDataFromAPI(searchLink);
+};

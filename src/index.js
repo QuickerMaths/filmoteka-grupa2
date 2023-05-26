@@ -1,4 +1,3 @@
-
 import './sass/main.scss';
 import {
   moviesContainer,
@@ -6,4 +5,5 @@ import {
   getmoviesArray,
   getGenresArray,
   getDataFromAPI,
+  searchMovie,
 } from './js/movies-list';
