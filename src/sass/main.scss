@@ -1,6 +1,7 @@
 @import './basic/vars.scss';
 @import './basic/mixin.scss';
 @import './basic/common.scss';
+@import './basic/breakpoints';
 @import './Elements/header.scss';
 @import './Elements/footer.scss';
 @import './Elements/movies-list';
@@ -9,6 +10,6 @@
 @import './Elements/custom-components';
 @import './Elements/pagination';
 @import './Elements/loader';
-@import './basic/breakpoints';
+@import './Elements/localStorage';
 @import './partials/modal';
 
