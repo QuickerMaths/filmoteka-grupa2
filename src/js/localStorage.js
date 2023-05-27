@@ -1,12 +1,10 @@
-const url = 'https://image.tmdb.org/t/p/w500';
-
 export function addToWatched(data, watchButton) {
   const movieDetailsToSave = {
     title: data.title,
     id: data.id,
-    releaseDate: Number.parseInt(data.release_date),
-    genres: data.genres.map(genre => genre.id),
-    poster: url + data.poster_path,
+    release_date: data.release_date,
+    genre_ids: data.genres.map(genre => genre.id),
+    poster_path: data.poster_path,
     vote: data.vote_average.toFixed(1),
     popularity: data.popularity.toFixed(1),
     org_title: data.original_title,
@@ -42,9 +40,9 @@ export function addToQueued(data, queueButton) {
   const movieDetailsToSave = {
     title: data.title,
     id: data.id,
-    releaseDate: Number.parseInt(data.release_date),
-    genres: data.genres.map(genre => genre.id),
-    poster: url + data.poster_path,
+    release_date: data.release_date,
+    genre_ids: data.genres.map(genre => genre.id),
+    poster_path: data.poster_path,
     vote: data.vote_average.toFixed(1),
     popularity: data.popularity.toFixed(1),
     org_title: data.original_title,

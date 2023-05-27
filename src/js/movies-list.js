@@ -3,13 +3,14 @@ import { listBuilder } from './movies-list-builder';
 
 const moviesContainer = document.getElementById('movies-container');
 
+export const trendingUrl =
+  'https://api.themoviedb.org/3/trending/movie/day?api_key=eaafeda4857b9c9fecdb45e75f22375a';
+
 window.addEventListener('load', () => {
-  getTrendingMovies(
-    'https://api.themoviedb.org/3/trending/movie/day?api_key=eaafeda4857b9c9fecdb45e75f22375a',
-  );
+  getTrendingMovies(trendingUrl);
 });
 
-const getTrendingMovies = async url => {
+export const getTrendingMovies = async url => {
   try {
     const response = await axios.get(url);
     moviesContainer.insertAdjacentHTML('beforeend', listBuilder(response.data.results));
