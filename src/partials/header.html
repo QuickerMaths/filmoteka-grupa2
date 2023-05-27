@@ -6,10 +6,10 @@
     </a>
     <ul class="navigation__links-list">
       <li class="navigation__list-item">
-        <a href="/" class="navigation__list-link navigation__list-link--active"> Home </a>
+        <a href="#" id="home" class="navigation__list-link navigation__list-link--active"> Home </a>
       </li>
       <li class="navigation__list-item">
-        <a href="/" class="navigation__list-link">My library</a>
+        <a href="#" id="library" class="navigation__list-link">My library</a>
       </li>
     </ul>
   </nav>
@@ -24,12 +24,19 @@
   <p class="header__error-message hidden">
     Search result not successful. Enter the correct movie name and try again
   </p>
-  <ul class="header__buttons-list hidden">
+  <ul id="button-group" class="header__buttons-list hidden">
     <li class="header__buttons-list-item">
-      <button id="watched-btn" class="header__list-button-watched">Watched</button>
+      <button
+        id="watched-btn"
+        type="button"
+        class="header__list-button-watched header__button--active"
+        disabled
+      >
+        Watched
+      </button>
     </li>
     <li class="header__buttons-list-item">
-      <button id="queue-btn" class="header__list-button-queue">Queue</button>
+      <button id="queue-btn" type="button" class="header__list-button-queue">Queue</button>
     </li>
   </ul>
 </header>
