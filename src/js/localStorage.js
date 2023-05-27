@@ -1,20 +1,16 @@
-import { exportData, idToGenere } from './searchFilm';
-
-const watchButton = document.querySelector('.card-film__btn-watch');
-const queueButton = document.querySelector('.card-film__btn-queue');
 const url = 'https://image.tmdb.org/t/p/w500';
 
-function addToWatched() {
+export function addToWatched(data, watchButton) {
   const movieDetailsToSave = {
-    title: exportData.title,
-    id: exportData.id,
-    releaseDate: Number.parseInt(exportData.release_date),
-    genres: exportData.genres.map(genre => idToGenere(genre.id)).join(', '),
-    poster: url + exportData.poster_path,
-    vote: exportData.vote_average.toFixed(1),
-    popularity: exportData.popularity.toFixed(1),
-    org_title: exportData.original_title,
-    about: exportData.overview,
+    title: data.title,
+    id: data.id,
+    releaseDate: Number.parseInt(data.release_date),
+    genres: data.genres.map(genre => genre.id),
+    poster: url + data.poster_path,
+    vote: data.vote_average.toFixed(1),
+    popularity: data.popularity.toFixed(1),
+    org_title: data.original_title,
+    about: data.overview,
   };
 
   watchButton.innerHTML = 'ADDED TO WATCHED';
@@ -29,12 +25,12 @@ function addToWatched() {
 
   const savedMovies = JSON.parse(watched);
 
-  if (watched.includes(exportData.id)) {
+  if (watched.includes(data.id)) {
     watchButton.innerHTML = 'ADD TO WATCHED';
     watchButton.classList.remove('btn-mod-color');
     localStorage.setItem(
       'WATCH_KEY',
-      JSON.stringify(savedMovies.filter(movie => movie.id !== exportData.id)),
+      JSON.stringify(savedMovies.filter(movie => movie.id !== data.id)),
     );
     return;
   } else {
@@ -42,17 +38,17 @@ function addToWatched() {
   }
 }
 
-function addToQueued() {
+export function addToQueued(data, queueButton) {
   const movieDetailsToSave = {
-    title: exportData.title,
-    id: exportData.id,
-    releaseDate: Number.parseInt(exportData.release_date),
-    genres: exportData.genres.map(genre => idToGenere(genre.id)).join(', '),
-    poster: url + exportData.poster_path,
-    vote: exportData.vote_average.toFixed(1),
-    popularity: exportData.popularity.toFixed(1),
-    org_title: exportData.original_title,
-    about: exportData.overview,
+    title: data.title,
+    id: data.id,
+    releaseDate: Number.parseInt(data.release_date),
+    genres: data.genres.map(genre => genre.id),
+    poster: url + data.poster_path,
+    vote: data.vote_average.toFixed(1),
+    popularity: data.popularity.toFixed(1),
+    org_title: data.original_title,
+    about: data.overview,
   };
 
   queueButton.innerHTML = 'ADDED TO QUEUE';
@@ -67,18 +63,15 @@ function addToQueued() {
 
   const savedMovies = JSON.parse(queued);
 
-  if (queued.includes(exportData.id)) {
+  if (queued.includes(data.id)) {
     queueButton.innerHTML = 'ADD TO QUEUE';
     queueButton.classList.remove('btn-mod-color');
     localStorage.setItem(
       'QUEUE_KEY',
-      JSON.stringify(savedMovies.filter(movie => movie.id !== exportData.id)),
+      JSON.stringify(savedMovies.filter(movie => movie.id !== data.id)),
     );
     return;
   } else {
     localStorage.setItem('QUEUE_KEY', JSON.stringify([...savedMovies, movieDetailsToSave]));
   }
 }
-
-watchButton.addEventListener('click', addToWatched);
-queueButton.addEventListener('click', addToQueued);

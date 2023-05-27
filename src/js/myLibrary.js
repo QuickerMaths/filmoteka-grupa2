@@ -1,58 +1,30 @@
-const listFilms = document.querySelector('.movies-list');
+import { listBuilder } from './movies-list-builder.js';
+
+const moviesContainer = document.getElementById('movies-container');
 const messageNoMovies = document.querySelector('.movie__container');
 
 function renderFilmsWatched(parsedWatched) {
-  listFilms.innerHTML = '';
+  moviesContainer.innerHTML = '';
   const parsed = JSON.parse(localStorage.getItem('WATCH_KEY'));
   if (parsed === null || parsed === 0 || parsed.length < 1) {
     messageNoMovies.classList.remove('hidden');
     return;
   }
   messageNoMovies.classList.add('hidden');
-  const card = parsed
-    .map(image => {
-      return `
-      <li class="movie-item">
-        <img class="boxID" alt="${image.title} movie poster" movieID="${image.id}" movieTitle="${image.title} ${image.releaseDate}" src="${image.poster}">
-        <div class="info">
-          <p class="info__title">
-            <b>${image.title}</b>
-          </p>
-          <p class="info__genre">
-            <b> ${image.genres} | ${image.releaseDate}</b>
-          </p>
-        </div>
-      </li>`;
-    })
-    .join('');
-  listFilms.innerHTML = card;
+
+  moviesContainer.insertAdjacentHTML('beforeend', listBuilder(parsed));
 }
 
 function renderFilmsQueued(parsedQueued) {
-  listFilms.innerHTML = '';
+  moviesContainer.innerHTML = '';
   const parsed2 = JSON.parse(localStorage.getItem('QUEUE_KEY'));
   if (parsed2 === null || parsed2 === 0 || parsed2.length < 1) {
     messageNoMovies.classList.remove('hidden');
     return;
   }
   messageNoMovies.classList.add('hidden');
-  const card = parsed2
-    .map(image => {
-      return `
-        <li class="movie-item">
-          <img class="boxID" alt="${image.title} movie poster" movieID="${image.id}" movieTitle="${image.title} ${image.releaseDate}" src="${image.poster}">
-          <div class="info">
-            <p class="info__title">
-              <b>${image.title}</b>
-            </p>
-            <p class="info__genre">
-              <b> ${image.genres} | ${image.releaseDate}</b>
-            </p>
-          </div>
-        </li>`;
-    })
-    .join('');
-  listFilms.innerHTML = card;
+
+  moviesContainer.insertAdjacentHTML('beforeend', listBuilder(parsed2));
 }
 
 const watchedBtn = document.querySelector('#watched-btn');
