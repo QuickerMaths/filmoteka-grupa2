@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addToQueued, addToWatched } from './localStorage';
 
 const moviesContainer = document.getElementById('movies-container');
 const modal = document.querySelector('.modal');
@@ -19,6 +20,7 @@ moviesContainer.addEventListener('click', event => {
 showModal.addEventListener('click', () => {
   document.querySelector('.modal__close-btn').addEventListener('click', () => {
     toggleModal();
+    removeEventListener();
   });
 });
 
@@ -34,7 +36,7 @@ const fetchInfo = async id => {
   }
 };
 
-function getModalFilmInfo(data) {
+const getModalFilmInfo = data => {
   return `
   <button class="modal__close-btn">
       <svg viewBox="0 0 30 30" class="modal__close-btn--svg" xmlns="http://www.w3.org/2000/svg">
@@ -77,22 +79,34 @@ function getModalFilmInfo(data) {
         </table>
     </li>
     <li>
-        <p class="modal__list__desc__title">About</p>
-        <p class="modal__list__desc">${data.overview}</p>
-           </li>
-           <li>
-           <div class="modal__btn-container mod--buttons">
-      <button type="button" class="modal__btn modal__btn-watch">add to watched</button>
-      <button type="button" class="modal__btn modal__btn-queue">add to queue</button>
-    </div></li>
-           </ul>`;
-}
+      <p class="modal__list__desc__title">About</p>
+      <p class="modal__list__desc">${data.overview}</p>
+    </li>
+    <li>
+      <div class="modal__btn-container mod--buttons">
+        <button type="button" class="modal__btn modal__btn-watch">add to watched</button>
+        <button type="button" class="modal__btn modal__btn-queue">add to queue</button>
+      </div>
+    </li>
+  </ul>`;
+};
 
 const Modal = data => {
   modal.innerHTML = '';
   modal.insertAdjacentHTML('beforeend', getModalFilmInfo(data));
-  removeEventListener();
+  modal.addEventListener('click', event => {
+    if (event.target.classList.contains('modal__btn-watch')) {
+      addToWatched(data, event.target);
+    }
+    if (event.target.classList.contains('modal__btn-queue')) {
+      addToQueued(data, event.target);
+    }
+  });
 };
+
+function toggleModal() {
+  showModal.classList.toggle('is-hidden');
+}
 
 function removeEventListener() {
   moviesContainer.removeEventListener('click', event => {
@@ -108,8 +122,12 @@ function removeEventListener() {
       toggleModal();
     }
   });
-}
-
-function toggleModal() {
-  showModal.classList.toggle('is-hidden');
+  modal.removeEventListener('click', event => {
+    if (event.target.classList.contains('modal__btn-watch')) {
+      addToWatched(data, event.target);
+    }
+    if (event.target.classList.contains('modal__btn-queue')) {
+      addToQueued(data, event.target);
+    }
+  });
 }
