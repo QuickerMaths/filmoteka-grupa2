@@ -5,3 +5,4 @@ import './js/modal';
 import './js/localStorage';
 import './js/myLibrary';
 import './js/home-lib-switch';
+import './js/pagination';
