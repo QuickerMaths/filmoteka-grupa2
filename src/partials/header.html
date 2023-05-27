@@ -6,10 +6,10 @@
     </a>
     <ul class="navigation__links-list">
       <li class="navigation__list-item">
-        <a href="/" id="home" class="navigation__list-link navigation__list-link--active"> Home </a>
+        <a href="#" id="home" class="navigation__list-link navigation__list-link--active"> Home </a>
       </li>
       <li class="navigation__list-item">
-        <a href="/" id="library" class="navigation__list-link">My library</a>
+        <a href="#" id="library" class="navigation__list-link">My library</a>
       </li>
     </ul>
   </nav>
@@ -26,7 +26,14 @@
   </p>
   <ul id="button-group" class="header__buttons-list hidden">
     <li class="header__buttons-list-item">
-      <button id="watched-btn" type="button" class="header__list-button-watched">Watched</button>
+      <button
+        id="watched-btn"
+        type="button"
+        class="header__list-button-watched header__button--active"
+        disabled
+      >
+        Watched
+      </button>
     </li>
     <li class="header__buttons-list-item">
       <button id="queue-btn" type="button" class="header__list-button-queue">Queue</button>

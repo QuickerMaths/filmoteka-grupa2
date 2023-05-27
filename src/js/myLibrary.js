@@ -1,60 +1,56 @@
 import { listBuilder } from './movies-list-builder.js';
 
 const moviesContainer = document.getElementById('movies-container');
-const messageNoMovies = document.querySelector('.movie__container');
+// const messageNoMovies = document.querySelector('.movie__container');
 
-function renderFilmsWatched(parsedWatched) {
+function renderFilmsWatched() {
   moviesContainer.innerHTML = '';
   const parsed = JSON.parse(localStorage.getItem('WATCH_KEY'));
-  if (parsed === null || parsed === 0 || parsed.length < 1) {
-    messageNoMovies.classList.remove('hidden');
-    return;
-  }
-  messageNoMovies.classList.add('hidden');
+  // if (parsed === null || parsed.length === 0) {
+  //   messageNoMovies.classList.remove('hidden');
+  //   return;
+  // }
+  // messageNoMovies.classList.add('hidden');
 
   moviesContainer.insertAdjacentHTML('beforeend', listBuilder(parsed));
 }
 
-function renderFilmsQueued(parsedQueued) {
+function renderFilmsQueued() {
   moviesContainer.innerHTML = '';
   const parsed2 = JSON.parse(localStorage.getItem('QUEUE_KEY'));
-  if (parsed2 === null || parsed2 === 0 || parsed2.length < 1) {
-    messageNoMovies.classList.remove('hidden');
-    return;
-  }
-  messageNoMovies.classList.add('hidden');
+  // if (parsed2 === null || parsed2.length === 0) {
+  //   messageNoMovies.classList.remove('hidden');
+  //   return;
+  // }
+  // messageNoMovies.classList.add('hidden');
 
   moviesContainer.insertAdjacentHTML('beforeend', listBuilder(parsed2));
 }
 
-const watchedBtn = document.querySelector('#watched-btn');
-const queueBtn = document.querySelector('#queue-btn');
+const watchedBtnHeader = document.querySelector('#watched-btn');
+const queueBtnHeader = document.querySelector('#queue-btn');
 
-watchedBtn.addEventListener('click', () => {
-  watchedBtn.setAttribute('disabled', '');
-  queueBtn.removeAttribute('disabled');
-  watchedBtn.classList.add('active');
-  queueBtn.classList.remove('active');
+watchedBtnHeader.addEventListener('click', () => {
+  toggleLibButtons();
   renderFilmsWatched();
 });
 
-queueBtn.addEventListener('click', () => {
-  queueBtn.setAttribute('disabled', '');
-  watchedBtn.removeAttribute('disabled');
-  queueBtn.classList.add('active');
-  watchedBtn.classList.remove('active');
+queueBtnHeader.addEventListener('click', () => {
+  toggleLibButtons();
   renderFilmsQueued();
 });
 
-const libStart = () => {
+export const libStart = () => {
   const parsed = JSON.parse(localStorage.getItem('WATCH_KEY'));
-  if (parsed === null || parsed === 0 || parsed.length < 1) {
-    messageNoMovies.classList.remove('hidden');
-  }
-  watchedBtn.setAttribute('disabled', '');
-  queueBtn.removeAttribute('disabled');
-  watchedBtn.classList.add('active');
-  queueBtn.classList.remove('active');
-  renderFilms();
+  // if (parsed === null || parsed.length === 0) {
+  //   messageNoMovies.classList.remove('hidden');
+  // }
+  renderFilmsWatched();
 };
-libStart();
+
+function toggleLibButtons() {
+  watchedBtnHeader.classList.toggle('header__button--active');
+  queueBtnHeader.classList.toggle('header__button--active');
+  watchedBtnHeader.toggleAttribute('disabled');
+  queueBtnHeader.toggleAttribute('disabled');
+}
