@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { listBuilder } from './movies-list-builder';
 import { displayLoading, hideLoading } from './loader';
-import { pagination, onPaginationClick } from './pagination';
+import { paginationSearch, onPaginationClick } from './pagination';
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 const API_URL = 'https://api.themoviedb.org/3';
@@ -24,7 +24,7 @@ export const searchByKeyword = async query => {
     }
     moviesContainer.innerHTML = '';
     moviesContainer.insertAdjacentHTML('beforeend', listBuilder(response.data.results));
-    pagination.reset(response.data.total_results);
+    paginationSearch.reset(response.data.total_results);
   } catch (err) {
     console.log(err);
   }
@@ -40,7 +40,7 @@ searchForm.addEventListener('input', event => {
   searchByKeyword(query);
 });
 
-pagination.on('beforeMove', () => {
+paginationSearch.on('beforeMove', () => {
   currentPage += 1;
   onPaginationClick(currentPage, paginationUrl, queryParam);
 });

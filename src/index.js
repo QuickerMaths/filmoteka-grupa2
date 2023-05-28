@@ -1,5 +1,4 @@
 import './js/search';
-import './js/team-load-to-modal';
 import './js/loader';
 import './js/movies-list';
 import './js/modal';

@@ -34,7 +34,11 @@ const options = {
   },
 };
 
-export const pagination = new Pagination(
+export const paginationSearch = new Pagination(
+  document.getElementById('tui-pagination-container'),
+  options,
+);
+export const paginationTrending = new Pagination(
   document.getElementById('tui-pagination-container'),
   options,
 );
@@ -45,6 +49,7 @@ export async function onPaginationClick(page, url, searchParam = '') {
     const response = await axios.get(
       `${url}?api_key=eaafeda4857b9c9fecdb45e75f22375a&query=${searchParam}&page=${page}}`,
     );
+    console.log(searchParam);
     moviesContainer.insertAdjacentHTML('beforeend', listBuilder(response.data.results));
   } catch (err) {
     console.log(err);
