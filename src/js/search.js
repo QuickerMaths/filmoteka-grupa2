@@ -2,6 +2,7 @@ import axios from 'axios';
 import { listBuilder } from './movies-list-builder';
 import { pagination } from './pagination';
 import { displayLoading, hideLoading } from './loader';
+import debounce from 'lodash.debounce';
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 const API_URL = 'https://api.themoviedb.org/3';
@@ -29,15 +30,21 @@ export const searchByKeyword = async query => {
   hideLoading();
 };
 
-searchForm.addEventListener('input', event => {
-  event.preventDefault();
+searchForm.addEventListener(
+  'input',
+  event => {
+    event.preventDefault();
 
-  queryParam = searchInput.value.trim();
-  const query = searchInput.value.trim();
-  if (query === '') return;
-  searchByKeyword(query);
-});
-
+    queryParam = searchInput.value.trim();
+    const query = searchInput.value.trim();
+    if (query === '') return;
+    searchByKeyword(query);
+  },
+  debounce(query => {
+    query = searchInput.value.trim();
+    searchByKeyword(query);
+  }, 200),
+);
 pagination.on('beforeMove', async (event, query = queryParam) => {
   currentPage = event.page;
   moviesContainer.innerHTML = '';
