@@ -45,7 +45,11 @@ const getModalFilmInfo = data => {
       </svg>
     </button>
   <img class="modal__img"
-    src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="alt"
+    src="${
+      data.poster_path === null
+        ? `../no-image.a36cc527.png`
+        : `https://image.tmdb.org/t/p/w500${data.poster_path}`
+    }" alt="alt"
     loading="lazy">
   <ul class="modal__list">
      <li>
