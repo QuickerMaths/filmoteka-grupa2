@@ -1,9 +1,9 @@
-
-import './sass/main.scss';
-import {
-  moviesContainer,
-  listBuilder,
-  getmoviesArray,
-  getGenresArray,
-  getDataFromAPI,
-} from './js/movies-list';
+import './js/search';
+import './js/loader';
+import './js/movies-list';
+import './js/modal';
+import './js/localStorage';
+import './js/myLibrary';
+import './js/home-lib-switch';
+import './js/pagination';
+import './js/firebase';
