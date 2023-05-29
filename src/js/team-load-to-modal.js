@@ -1,3 +1,6 @@
+document.getElementById("modal-link").addEventListener("click", function(event) {
+  event.preventDefault(); });
+
 const refs = {
     openModal: document.querySelector('.open-modal-team'),
     closeModal: document.querySelector('.close-modal-team'),
@@ -43,12 +46,4 @@ const refs = {
     }
   }
   
-  document.addEventListener('DOMContentLoaded', function() {
-    var link = document.querySelector('.footer__link a');
-    link.addEventListener('click', function(event) {
-      event.preventDefault(); // Zatrzymaj domyślne działanie kliknięcia linku
   
-      // Otwórz okno modalne w osobnym oknie
-      window.open(link.href, '_blank', 'width=800,height=600');
-    });
-  });
