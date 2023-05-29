@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { addToQueued, addToWatched } from './localStorage';
+import noImageFound from '../images/no-image.png';
 
 const moviesContainer = document.getElementById('movies-container');
 const modal = document.querySelector('.modal');
@@ -31,7 +32,7 @@ const getModalFilmInfo = data => {
   <img class="modal__img"
     src="${
       data.poster_path === null
-        ? `../no-image.a36cc527.png`
+        ? noImageFound
         : `https://image.tmdb.org/t/p/w500${data.poster_path}`
     }" alt="alt"
     loading="lazy">
