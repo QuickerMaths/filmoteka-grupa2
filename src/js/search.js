@@ -21,6 +21,7 @@ export const searchByKeyword = async query => {
     const response = await axios.get(`${API_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
     if (response.data.results.length === 0) {
       noResults.classList.remove('hidden');
+      setTimeout('location.reload()', 3000);
     }
     moviesContainer.innerHTML = '';
     moviesContainer.insertAdjacentHTML('beforeend', listBuilder(response.data.results));
