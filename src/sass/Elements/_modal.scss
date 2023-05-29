@@ -8,6 +8,8 @@
   z-index: 1000;
   display: grid;
   place-items: center;
+  padding: 50px 0px;
+  overflow: scroll;
 }
 
 .is-hidden {
@@ -19,8 +21,11 @@
 .modal {
   position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: 90%;
+  min-width: 60%;
+  width: min-content;
   padding: 25px 50px;
   margin: auto;
   background-color: var(--white);
@@ -133,7 +138,9 @@
   .modal {
     display: flex;
     flex-direction: row;
-    width: 70%;
+    gap: 20px;
+    width: min-content;
+    min-width: 70%;
 
     &__img {
       min-width: 264px;
@@ -142,10 +149,6 @@
 
     &__title {
       margin-top: 0;
-    }
-
-    &__btn-container {
-      justify-content: space-between;
     }
 
     &__btn {
@@ -157,7 +160,8 @@
 @media (min-width: 1024px) {
   .modal {
     gap: 16px;
-    width: 50%;
+    width: min-content;
+    min-width: 40%;
 
     &__img {
       min-width: 375px;
