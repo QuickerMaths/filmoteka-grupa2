@@ -3,26 +3,10 @@ import { addToQueued, addToWatched } from './localStorage';
 
 const moviesContainer = document.getElementById('movies-container');
 const modal = document.querySelector('.modal');
-const showModal = document.querySelector('.backdrop');
+const backdrop = document.querySelector('.backdrop');
+const wrapper = document.querySelector('.modal-wrapper');
 
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
-
-window.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
-    toggleModal();
-  }
-});
-
-moviesContainer.addEventListener('click', event => {
-  fetchInfo(event.target.parentNode.id);
-});
-
-showModal.addEventListener('click', () => {
-  document.querySelector('.modal__close-btn').addEventListener('click', () => {
-    toggleModal();
-    removeEventListener();
-  });
-});
 
 const fetchInfo = async id => {
   try {
@@ -99,6 +83,13 @@ const Modal = data => {
   modal.innerHTML = '';
   modal.insertAdjacentHTML('beforeend', getModalFilmInfo(data));
   modal.addEventListener('click', event => {
+    if (
+      event.target.classList.contains('modal__close-btn') ||
+      event.target.classList.contains('modal__close-btn--svg')
+    ) {
+      toggleModal();
+      removeEventListener();
+    }
     if (event.target.classList.contains('modal__btn-watch')) {
       addToWatched(data, event.target);
     }
@@ -108,25 +99,49 @@ const Modal = data => {
   });
 };
 
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !backdrop.classList.value.includes('is-hidden')) {
+    toggleModal();
+  }
+});
+
+moviesContainer.addEventListener('click', event => {
+  fetchInfo(event.target.parentNode.id);
+});
+
+backdrop.addEventListener('click', () => {
+  toggleModal();
+  removeEventListener();
+});
+
 function toggleModal() {
-  showModal.classList.toggle('is-hidden');
+  backdrop.classList.toggle('is-hidden');
+  modal.classList.toggle('is-hidden');
+  wrapper.classList.toggle('is-hidden');
 }
 
 function removeEventListener() {
   moviesContainer.removeEventListener('click', event => {
     fetchInfo(event.target.parentNode.id);
   });
-  showModal.removeEventListener('click', () => {
-    document.querySelector('.modal__close-btn').addEventListener('click', () => {
-      toggleModal();
-    });
+  backdrop.removeEventListener('click', () => {
+    toggleModal();
+    removeEventListener();
   });
   window.removeEventListener('keydown', event => {
     if (event.key === 'Escape' && !showModal.classList.value.includes('is-hidden')) {
       toggleModal();
+      removeEventListener();
     }
   });
-  modal.removeEventListener('click', event => {
+  modal.addEventListener('click', event => {
+    if (
+      event.target.classList.contains('modal__close-btn') ||
+      event.target.classList.contains('modal__close-btn--svg')
+    ) {
+      toggleModal();
+      removeEventListener();
+    }
     if (event.target.classList.contains('modal__btn-watch')) {
       addToWatched(data, event.target);
     }
