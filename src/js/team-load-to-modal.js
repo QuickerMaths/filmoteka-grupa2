@@ -42,3 +42,13 @@ const refs = {
       }, 400);
     }
   }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var link = document.querySelector('.footer__link a');
+    link.addEventListener('click', function(event) {
+      event.preventDefault(); // Zatrzymaj domyślne działanie kliknięcia linku
+  
+      // Otwórz okno modalne w osobnym oknie
+      window.open(link.href, '_blank', 'width=800,height=600');
+    });
+  });
