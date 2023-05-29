@@ -115,3 +115,7 @@ const Modal = data => {
   filmInfo.innerHTML = getModalFilmInfo(data);
   removeEventListener();
 };
+
+const trailerBtn = document.querySelector('.trailer-btn');
+
+  trailerBtn.dataset.filmId = cardData.id;

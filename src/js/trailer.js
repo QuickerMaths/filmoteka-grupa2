@@ -1,7 +1,7 @@
 import * as basicLightbox from 'basiclightbox';
 import { API_KEY, fetchTrailerById, BASE_URL } from './api';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import { filmId } from './loading-into-modal';
+import { filmId } from './loading-into-trailer';
 
 const srcTrailer = 'https://www.youtube.com/embed/';
 const trailerBtn = document.querySelector('.trailer-btn');
