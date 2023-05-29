@@ -9,17 +9,24 @@
   height: auto;
   text-align: center;
   color: var(--white);
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+
   &__mail {
+    margin: 5px 5px;
     padding: 5px 5px;
     color: var(--modal-params);
   }
   &__pass {
+    margin: 5px 5px;
     padding: 5px 5px;
     color: var(--modal-params);
   }
   &__signup {
-    padding: 15px 15px;
-    margin-top: 10px;
+    padding: 5px 20px;
     border: 3px solid var(--background-footer);
     border-radius: 10px;
     background-color: var(--error);
@@ -32,8 +39,7 @@
     }
   }
   &__signin {
-    padding: 15px 15px;
-    margin-top: 10px;
+    padding: 5px 23px;
     border: 3px solid var(--background-footer);
     border-radius: 10px;
     background-color: var(--orange-info);
