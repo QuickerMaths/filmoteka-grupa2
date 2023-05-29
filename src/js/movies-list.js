@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { listBuilder } from './movies-list-builder';
 import { paginationTrending, onPaginationClick } from './pagination';
+import { displayLoading, hideLoading } from './loader';
 
 const moviesContainer = document.getElementById('movies-container');
 
@@ -15,6 +16,7 @@ window.addEventListener('load', () => {
 });
 
 export const getTrendingMovies = async (url, page = 1) => {
+  displayLoading();
   try {
     const response = await axios.get(url + `&page=${page}`);
     moviesContainer.insertAdjacentHTML('beforeend', listBuilder(response.data.results));
@@ -22,6 +24,7 @@ export const getTrendingMovies = async (url, page = 1) => {
   } catch (err) {
     console.log(err);
   }
+  hideLoading();
 };
 
 paginationTrending.on('beforeMove', () => {

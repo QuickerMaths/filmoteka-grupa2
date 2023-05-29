@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { addToQueued, addToWatched } from './localStorage';
+import { displayLoading, hideLoading } from './loader';
 import noImageFound from '../images/no-image.png';
+
 
 const moviesContainer = document.getElementById('movies-container');
 const modal = document.querySelector('.modal');
@@ -10,6 +12,7 @@ const wrapper = document.querySelector('.modal-wrapper');
 const API_KEY = 'eaafeda4857b9c9fecdb45e75f22375a';
 
 const fetchInfo = async id => {
+  displayLoading();
   try {
     const movieData = await axios.get(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
@@ -19,6 +22,7 @@ const fetchInfo = async id => {
   } catch (error) {
     console.error(error);
   }
+  hideLoading();
 };
 
 const getModalFilmInfo = data => {

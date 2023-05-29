@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { displayLoading, hideLoading } from './loader';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDKC38c7pWddJzFZE7jy6eXesnVHdktZRs',
@@ -32,31 +33,37 @@ secretContent.style.display = 'none';
 const userSignUp = async () => {
   const signUpEmail = userEmail.value;
   const signUpPassword = userPassword.value;
+  displayLoading();
   createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
     .then(userCredential => {
       const user = userCredential.user;
       console.log(user);
+      hideLoading();
       alert('Your account has been created!');
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + errorMessage);
+      hideLoading();
     });
 };
 
 const userSignIn = async () => {
   const signInEmail = userEmail.value;
   const signInPassword = userPassword.value;
+  displayLoading();
   signInWithEmailAndPassword(auth, signInEmail, signInPassword)
     .then(userCredential => {
       const user = userCredential.user;
+      hideLoading();
       alert('You have signed in successfully!');
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + errorMessage);
+      hideLoading();
     });
 };
 
