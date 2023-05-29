@@ -4,7 +4,7 @@ import photoKasia from ".../images/team/Kasia.jpg";
 import photoKrzysztof from ".../images/team/Krzysztof.jpg";
 import photoLukasz from ".../images/team/Lukasz.jpg";
 import photoOliwia from "...images/team/Oliwia.jpg";
-import photoPrzemek from "...images/team/nothing.jpg";
+import photoPrzemek from "...images/team/Przemek.jpg";
 
 export const teamList = [
     {
