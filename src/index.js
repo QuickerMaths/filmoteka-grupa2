@@ -1,12 +1,9 @@
-import './sass/main.scss';
-import {
-  moviesContainer,
-  listBuilder,
-  getmoviesArray,
-  getGenresArray,
-  getDataFromAPI,
-} from './js/movies-list';
-import { Modal } from './js/modal';
-import { displayLoading, hideLoading } from './js/loader';
 import './js/search';
-import * as teamModal from './js/team-load-to-modal';
+import './js/loader';
+import './js/movies-list';
+import './js/modal';
+import './js/localStorage';
+import './js/myLibrary';
+import './js/home-lib-switch';
+import './js/pagination';
+import './js/firebase';
