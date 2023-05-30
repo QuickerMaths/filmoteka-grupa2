@@ -100,7 +100,10 @@ const getModalFilmInfo = data => {
 
 const Modal = data => {
   modal.innerHTML = '';
-  modal.insertAdjacentHTML('beforeend', getModalFilmInfo(data));
+  modal.innerHTML = getModalFilmInfo(data);
+  if (localStorage.getItem('WATCH_KEY') || localStorage.getItem('QUEUE_KEY')) {
+    checkIfInLocalStorage(data);
+  }
   modal.addEventListener('click', event => {
     if (
       event.target.classList.contains('modal__close-btn') ||
@@ -159,7 +162,7 @@ function removeEventListener() {
       removeEventListener();
     }
   });
-  modal.addEventListener('click', event => {
+  modal.removeEventListener('click', event => {
     if (
       event.target.classList.contains('modal__close-btn') ||
       event.target.classList.contains('modal__close-btn--svg')
@@ -177,4 +180,25 @@ function removeEventListener() {
       fetchTrailer(data.id);
     }
   });
+}
+
+function checkIfInLocalStorage(data) {
+  const watched = JSON.parse(localStorage.getItem('WATCH_KEY'));
+  const queued = JSON.parse(localStorage.getItem('QUEUE_KEY'));
+
+  if (watched) {
+    const watchedIds = watched.map(item => item.id);
+    if (watchedIds.includes(data.id)) {
+      modal.querySelector('.modal__btn-watch').textContent = 'ADDED TO WATCHED';
+      modal.querySelector('.modal__btn-watch').classList.add('btn-mod-color');
+    }
+  }
+
+  if (queued) {
+    const queuedIds = queued.map(item => item.id);
+    if (queuedIds.includes(data.id)) {
+      modal.querySelector('.modal__btn-queue').textContent = 'ADDED TO QUEUED';
+      modal.querySelector('.modal__btn-queue').classList.add('btn-mod-color');
+    }
+  }
 }
