@@ -8,3 +8,4 @@ import './js/home-lib-switch';
 import './js/pagination';
 import './js/firebase';
 import './js/team-load-to-modal';
+import './js/trailer';
