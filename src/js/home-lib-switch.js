@@ -5,6 +5,7 @@ const library = document.getElementById('library');
 const libButtons = document.getElementById('button-group');
 const home = document.getElementById('home');
 const moviesContainer = document.getElementById('movies-container');
+const pagination = document.querySelector('.tui-pagination');
 
 library.addEventListener('click', () => {
   home.classList.remove('navigation__list-link--active');
@@ -19,4 +20,5 @@ home.addEventListener('click', () => {
   libButtons.classList.add('hidden');
   moviesContainer.innerHTML = '';
   getTrendingMovies(trendingUrl);
+  pagination.classList.remove('hidden');
 });
