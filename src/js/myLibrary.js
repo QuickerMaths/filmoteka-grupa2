@@ -1,6 +1,7 @@
 import { listBuilder } from './movies-list-builder.js';
 
 const moviesContainer = document.getElementById('movies-container');
+const pagination = document.querySelector('.tui-pagination');
 // const messageNoMovies = document.querySelector('.movie__container');
 
 function renderFilmsWatched() {
@@ -45,6 +46,7 @@ export const libStart = () => {
   // if (parsed === null || parsed.length === 0) {
   //   messageNoMovies.classList.remove('hidden');
   // }
+  pagination.classList.add('hidden');
   renderFilmsWatched();
 };
 
