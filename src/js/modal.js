@@ -2,7 +2,7 @@ import axios from 'axios';
 import { addToQueued, addToWatched } from './localStorage';
 import { displayLoading, hideLoading } from './loader';
 import noImageFound from '../images/no-image.png';
-
+import { fetchTrailer } from './trailer';
 
 const moviesContainer = document.getElementById('movies-container');
 const modal = document.querySelector('.modal');
@@ -33,13 +33,27 @@ const getModalFilmInfo = data => {
         <path d="M8 22L22 8" class="modal__close-btn--path" />
       </svg>
     </button>
-  <img class="modal__img"
+    <div class="modal__img-container">
+    <button class="modal__trailer-button">
+      <svg class="modal__svg-trailer" fill="#ffffff" height="75px" width="75px" version="1.1" id="icon-play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	      viewBox="0 0 60 60" xml:space="preserve">
+        <g>
+	      <path d="M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30
+		      c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15
+		      C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z"/>
+	      <path d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30
+		      S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z"/>
+        </g>
+      </svg>
+    </button>
+  <img class="modal__img" 
     src="${
       data.poster_path === null
         ? noImageFound
         : `https://image.tmdb.org/t/p/w500${data.poster_path}`
     }" alt="alt"
-    loading="lazy">
+    loading="lazy"> 
+    </div>
   <ul class="modal__list">
      <li>
        <h2 class="modal__title">${data.title}</h2>
@@ -101,6 +115,12 @@ const Modal = data => {
     if (event.target.classList.contains('modal__btn-queue')) {
       addToQueued(data, event.target);
     }
+    if (
+      event.target.classList.contains('modal__trailer-button') ||
+      event.target.classList.contains('modal__svg-trailer')
+    ) {
+      fetchTrailer(data.id);
+    }
   });
 };
 
@@ -152,6 +172,9 @@ function removeEventListener() {
     }
     if (event.target.classList.contains('modal__btn-queue')) {
       addToQueued(data, event.target);
+    }
+    if (event.target.classList.contains('modal__trailer-button')) {
+      fetchTrailer(data.id);
     }
   });
 }
