@@ -34,8 +34,9 @@
   }
 
   &__image {
-    width: 100%;
-    max-height: 402px;
+    margin: 0 auto;
+    width: 300px;
+    max-height: 400px;
     border-radius: 5px;
     contain: content;
     transition: box-shadow, transform, 250ms cubic-bezier(0.4, 0, 0.2, 1);
