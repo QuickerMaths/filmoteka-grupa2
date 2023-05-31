@@ -1,13 +1,15 @@
 .header {
   color: white;
   padding: 48px 20px 0 20px;
-  background: url('../images/header/header-mobile-x1.jpg') no-repeat 50% 50% / 320px 230px black;
+  background: url('../images/header/header-mobile-x1.jpg') no-repeat / black;
+  background-size: cover;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.56);
   height: 250px;
   width: 100%;
   box-sizing: border-box;
   &--library {
-    background: url('../images/header/header-library-x1.jpg') no-repeat 10% 50% / 1024px 230px black;
+    background: url('../images/header/header-library-x1.jpg') no-repeat / black;
+    background-size: cover;
   }
 
   &__navigation {
